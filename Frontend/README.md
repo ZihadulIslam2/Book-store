@@ -6,3 +6,7 @@
 - set the front from gfont ? montserrat, nunito sans ? (53.35 min)
 - create a navber ? 58.00 min
 - setup react icons ? (1.17 h)
+- set dynamic user icon on navber ?
+- add a dropdown option when the user cleck to the user icon.? (1.27 h)
+
+-
