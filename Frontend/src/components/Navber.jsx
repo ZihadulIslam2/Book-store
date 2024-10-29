@@ -16,6 +16,12 @@ const navigation = [
 
 // quest :
 // const Navber = () => {
+//   const currentUser = true;
+//   console.log("currentUser:  ", currentUser);
+
+//   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+//   console.log("isDropdownOpen  :", isDropdownOpen);
+
 //   return (
 //     <header className="px-4 py-6">
 //       <nav className="flex justify-between items-center ">
@@ -41,7 +47,27 @@ const navigation = [
 
 //         {/* right side  */}
 //         <div className="flex">
-//           <HiUser className="size-6" />
+//           <>
+//             {currentUser ? (
+//               <button onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
+//                 <img src={avatarIcon} alt="" />
+//               </button>
+//             ) : (
+//               <HiUser className="size-6" />
+//             )}
+//             {isDropdownOpen ? (
+//               <ul>
+//                 {navigation.map((x) => (
+//                   <li key={x.name}>
+//                     <Link to={x.href}>{x.name}</Link>
+//                   </li>
+//                 ))}
+//               </ul>
+//             ) : (
+//               " "
+//             )}
+//           </>
+
 //           <FaRegHeart className="size-6" />
 //           <div>
 //             <button>
@@ -54,9 +80,12 @@ const navigation = [
 //   );
 // };
 
+// export default Navber;
+
+// code from the tutorial:
 const Navber = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  console.log(isDropdownOpen);
+  console.log("Dropdown: ", isDropdownOpen);
   const currantUser = true;
   return (
     <header className="max-w-screen-2xl mx-auto px-4 py-6">
