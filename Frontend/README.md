@@ -11,4 +11,11 @@
 - create home componetns ? 1.34 min
 - feath data from the books.json file ? (1.44 min)
 - create a dropdown category filter on top sellers.? 
-2.04h 
+2.04h
+- swiper js for product swiping .
+- create the futor section ?
+- add the title and title icon .
+-  create a login page ?
+- use react hock form for get data frome object form use on login page ?
+- 
+- 

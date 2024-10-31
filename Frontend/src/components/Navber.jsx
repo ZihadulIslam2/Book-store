@@ -163,7 +163,7 @@ const navigation = [
 const Navber = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   console.log("Dropdown: ", isDropdownOpen);
-  const currantUser = true; // Simulating a logged-in user
+  const currantUser = false; // Simulating a logged-in user
 
   return (
     <header className="max-w-screen-2xl mx-auto px-4 py-6">
