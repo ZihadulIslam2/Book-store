@@ -21,9 +21,13 @@
 
 
 - add to chart chancing :
-  state the logic ? add to card function: 3.21 h
-  - get the data
-  - check if the data is already not exist show alert mess successfully add to add to card
-  - if the data exits send mess already exist your data 
-  - store the item info to a addtocarditem variable
+   state the logic ? add to card function: 3.21 h
+   get the data
+   check if the data is already not exist show alert mess successfully add to add to card
+   if the data exits send mess already exist your data 
+   store the item info to a addtocarditem variable
 
+- get the cartItem from the redux stor (slice)
+- add nevAddTo cart icon number.
+- add sweetalrt to the alrt message.
+- create removeItem fun, and clear function
