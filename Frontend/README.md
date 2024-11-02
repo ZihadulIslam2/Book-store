@@ -31,3 +31,5 @@
 - add nevAddTo cart icon number.
 - add sweetalrt to the alrt message.
 - create removeItem fun, and clear function
+- define a path for  the cart item
+- total price function ?

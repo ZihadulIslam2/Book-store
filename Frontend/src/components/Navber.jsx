@@ -18,6 +18,8 @@ const navigation = [
 
 
 const Navber = () => {
+  // 
+  // 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   console.log("Dropdown: ", isDropdownOpen);
   const currantUser = false; // Simulating a logged-in user
