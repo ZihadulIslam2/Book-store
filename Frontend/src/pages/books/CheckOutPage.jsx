@@ -1,18 +1,50 @@
-import React from 'react'
-import { useSelector } from 'react-redux';
+import React from "react";
+import { useSelector } from "react-redux";
+import { useForm } from "react-hook-form";
+import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const CheckOutPage = () => {
-    const cartItems = useSelector(state=>state.cart.cartItems)
-        const totalPrice = cartItems
-          .reduce((acc, item) => acc + item.newPrice, 0)
-          .toFixed(2);
 
-    const handleSubmit=()=>{
-        
-    }
+  const currentUser = true;
+
+  const cartItems = useSelector((state) => state.cart.cartItems);
+
+  const totalPrice = cartItems
+    .reduce((acc, item) => acc + item.newPrice, 0)
+    .toFixed(2);
+
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    console.log("from the checkout page:  ",data);
+
+    const newOrder = {
+      name: data.name,
+      email: currentUser?.email,
+      address: {
+        city:data.city,
+        country: data.country,
+        state: data.state,
+        zipcode: data.zipcode,
+
+      },
+      phone: data.phone,
+      productIds: cartItems.map(item=>item?._id ),
+      totalPrice: totalPrice,
+
+    };
+    console.log(newOrder)
+  }
+
+  const [ isChecked, setIsChecked] = useState(false)
 
   return (
-    <>
+    <section>
       <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
         <div className="container max-w-screen-lg mx-auto">
           <div>
@@ -20,7 +52,7 @@ const CheckOutPage = () => {
               <h2 className="font-semibold text-xl text-gray-600 mb-2">
                 Cash On Delevary
               </h2>
-              <p className="text-gray-500 mb-2">Total Price: $0</p>
+              <p className="text-gray-500 mb-2">Total Price: ${totalPrice}</p>
               <p className="text-gray-500 mb-6">Items:0</p>
             </div>
 
@@ -42,6 +74,7 @@ const CheckOutPage = () => {
                         type="text"
                         name="name"
                         id="name"
+                        {...register("name", { required: true })}
                         className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                       />
                     </div>
@@ -64,6 +97,7 @@ const CheckOutPage = () => {
                         type="number"
                         name="phone"
                         id="phone"
+                        {...register("phone", { required: true })}
                         className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                         placeholder="+123 456 7890"
                       />
@@ -75,6 +109,7 @@ const CheckOutPage = () => {
                         type="text"
                         name="address"
                         id="address"
+                        {...register("address", { required: true })}
                         className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                         placeholder=""
                       />
@@ -86,6 +121,7 @@ const CheckOutPage = () => {
                         type="text"
                         name="city"
                         id="city"
+                        {...register("city", { required: true })}
                         className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                         placeholder=""
                       />
@@ -98,6 +134,7 @@ const CheckOutPage = () => {
                           name="country"
                           id="country"
                           placeholder="Country"
+                          {...register("country", { required: true })}
                           className="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
                         />
                         <button
@@ -143,6 +180,7 @@ const CheckOutPage = () => {
                           name="state"
                           id="state"
                           placeholder="State"
+                          {...register("state", { required: true })}
                           className="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
                         />
                         <button className="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-red-600">
@@ -184,6 +222,7 @@ const CheckOutPage = () => {
                         type="text"
                         name="zipcode"
                         id="zipcode"
+                        {...register("zipcode", { required: true })}
                         className="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                         placeholder=""
                       />
@@ -195,6 +234,8 @@ const CheckOutPage = () => {
                           type="checkbox"
                           name="billing_same"
                           id="billing_same"
+                          {...register("state", { required: true })}
+                          onChange={() => setIsChecked(!isChecked)}
                           className="form-checkbox"
                         />
                         <label htmlFor="billing_same" className="ml-2 ">
@@ -227,8 +268,8 @@ const CheckOutPage = () => {
           </div>
         </div>
       </div>
-    </>
+    </section>
   );
-}
+};
 
-export default CheckOutPage
+export default CheckOutPage;
