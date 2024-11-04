@@ -33,3 +33,17 @@
 - create removeItem fun, and clear function
 - define a path for  the cart item
 - total price function ?
+3.54 min
+
+# create the checkOutPage
+ step by step processes:
+ - create an router checkOutpage2 and component.
+ - create the interface according to the screenshot
+
+
+
+
+
+
+
+ min-h-screen, container, max-w-screen-lg, 
