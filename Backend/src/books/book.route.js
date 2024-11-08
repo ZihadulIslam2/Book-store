@@ -1,9 +1,13 @@
 const express = require('express')
 const router = express.Router();
+const Book = require('./book.model');
+const { postABook, getAllBooks } = require('./book.controller');
 
 // post a book
-router.post("/create-book", async (req,res)=>{
-    console.log(req.body)
-})
+router.post("/create-book", postABook)
+
+// get all books
+router.get("/",  getAllBooks)
+
 
 module.exports =router
