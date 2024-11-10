@@ -8,4 +8,7 @@
 - 4.30h
 - console log the book data front end to (using postman), on the server side.4.34h
 - save the date to the mongodb database.
--  
+-  get all the data.
+- get a single data using the parameter url (:id)
+- update a book data using the put. 
+- delete book 
