@@ -50,4 +50,7 @@
 
  - create redux api, bookApi.js
  redux rtk query:
- - 
+
+ - bookApi.js file
+create base url.js for access from any where
+- 5.26 min

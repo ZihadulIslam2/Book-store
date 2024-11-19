@@ -16,7 +16,9 @@ const baseQuery = fetchBaseQuery (
 )
 
 const booksApi = createApi({
+  // basic path name
   reducerPath: "booksApi",
+  // define base query
   baseQuery,
   tagTypes: ["Books"],
 
@@ -25,6 +27,20 @@ const booksApi = createApi({
       query: () => "/",
       providesTags: ["Books"],
     }),
+    fetchBookById: builder.query({
+      query:(id)=>`/${id}`,
+      providesTags: (results,error,id)=> [{type: "Books", id}]
+    }),
+    addBook: builder.mutation({
+      query: (newBook) =>({
+        url:`/create-book` ,
+        method: "POST",
+        body: newBook
+      })
+
+      )
+    })
+
   }),
 });
 
