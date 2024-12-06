@@ -1,4 +1,12 @@
-import React, { useState } from "react";
+/*
+/questions: 10 
+1.useSelector used for ?
+2.? how this operator works ?
+3. && how this works ?
+
+*/ 
+
+
 import { Link } from "react-router-dom";
 import { HiBars3CenterLeft, HiOutlineShoppingCart } from "react-icons/hi2";
 import { IoSearch } from "react-icons/io5";
@@ -6,7 +14,7 @@ import { HiUser } from "react-icons/hi2";
 import { FaRegHeart } from "react-icons/fa";
 import avatarIcon from "../assets/avatar.png";
 import { useSelector } from 'react-redux';
-import Swal from "sweetalert2";
+import { useState } from "react";
 
 // dropdown
 const navigation = [
@@ -18,14 +26,13 @@ const navigation = [
 
 
 const Navber = () => {
-  // 
-  // 
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   console.log("Dropdown: ", isDropdownOpen);
+
   const currantUser = false; // Simulating a logged-in user
 
-  const cartItems = useSelector(state=>state.cart.cartItems)
-  console.log("get the cart items from store from navber__:",cartItems)
+  const cartItems = useSelector((state) => state.cart.cartItems)
+  console.log("get the cart items from store from naver__:",cartItems)
 
   return (
     <header className="max-w-screen-2xl mx-auto px-4 py-6">

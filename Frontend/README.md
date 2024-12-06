@@ -54,3 +54,5 @@
  - bookApi.js file
 create base url.js for access from any where
 - 5.26 min
+- fire base auth. 5.37 min.
+-   npm install firebase 
