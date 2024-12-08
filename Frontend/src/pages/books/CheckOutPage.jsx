@@ -1,12 +1,13 @@
-import React from "react";
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
 
 const CheckOutPage = () => {
 
-  const currentUser = true;
+  // const currentUser = true;
+  const {currentUser}= useAuth()
 
   const cartItems = useSelector((state) => state.cart.cartItems);
 

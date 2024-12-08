@@ -13,7 +13,7 @@ const navigation = [
   { name: "Dashboard", href: "/dashboard" },
   { name: "Orders", href: "/order" },
   { name: "Cart page", href: "/cart" },
-  { name: "Check Out", href: "/check out" },
+  { name: "Check Out", href: "/checkout" },
 ];
 
 
