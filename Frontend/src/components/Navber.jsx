@@ -1,12 +1,3 @@
-/*
-/questions: 10 
-1.useSelector used for ?
-2.? how this operator works ?
-3. && how this works ?
-
-*/ 
-
-
 import { Link } from "react-router-dom";
 import { HiBars3CenterLeft, HiOutlineShoppingCart } from "react-icons/hi2";
 import { IoSearch } from "react-icons/io5";
@@ -15,6 +6,7 @@ import { FaRegHeart } from "react-icons/fa";
 import avatarIcon from "../assets/avatar.png";
 import { useSelector } from 'react-redux';
 import { useState } from "react";
+import { useAuth } from "../context/AuthContext";
 
 // dropdown
 const navigation = [
@@ -28,9 +20,14 @@ const navigation = [
 const Navber = () => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   console.log("Dropdown: ", isDropdownOpen);
+// auth
+  const { currentUser, logout } = useAuth()
 
-  const currantUser = false; // Simulating a logged-in user
+  // const currentUser = false; // Simulating a logged-in user
 
+  const handelLogOut = ()=>{
+    logout()
+  }
   const cartItems = useSelector((state) => state.cart.cartItems)
   console.log("get the cart items from store from naver__:",cartItems)
 
@@ -57,14 +54,14 @@ const Navber = () => {
         {/* right side  */}
         <div className="relative flex items-center md:space-x-3 space-x-2">
           <div>
-            {currantUser ? (
+            {currentUser ? (
               <>
                 <button onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
                   <img
                     src={avatarIcon}
                     alt=""
                     className={`size-7 rounded-full ${
-                      currantUser ? "ring-2 ring-blue-500" : ""
+                      currentUser ? 'ring-2 ring-blue-500' : ''
                     }`}
                   />
                 </button>
@@ -85,6 +82,11 @@ const Navber = () => {
                           </Link>
                         </li>
                       ))}
+                      <li>
+                        <button onClick={handelLogOut} className="w-full text-left block px-4 py-2 text-sm hover:bg-gray-100">
+                          Logout
+                        </button>
+                      </li>
                     </ul>
                   </div>
                 )}
@@ -106,7 +108,9 @@ const Navber = () => {
           >
             <HiOutlineShoppingCart className="" />
             {cartItems.length > 0 ? (
-              <span className="text-sm font-semibold sm:ml-1">{cartItems.length}</span>
+              <span className="text-sm font-semibold sm:ml-1">
+                {cartItems.length}
+              </span>
             ) : (
               <span className="text-sm font-semibold sm:ml-1">0</span>
             )}
@@ -114,7 +118,7 @@ const Navber = () => {
         </div>
       </nav>
     </header>
-  );
+  )
 };
 
 export default Navber;
