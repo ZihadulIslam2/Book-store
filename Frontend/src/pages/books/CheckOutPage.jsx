@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
+import { useCreateOrderMutation } from "../../redux/features/orders/orderApi";
 
 const CheckOutPage = () => {
 
@@ -11,9 +12,10 @@ const CheckOutPage = () => {
 
   const cartItems = useSelector((state) => state.cart.cartItems);
 
-  const totalPrice = cartItems
-    .reduce((acc, item) => acc + item.newPrice, 0)
-    .toFixed(2);
+const totalPrice = parseFloat(
+  cartItems.reduce((acc, item) => acc + item.newPrice, 0).toFixed(2)
+)
+
 
   const {
     register,
@@ -21,29 +23,36 @@ const CheckOutPage = () => {
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
-    console.log("from the checkout page:  ",data);
 
-    const newOrder = {
-      name: data.name,
-      email: currentUser?.email,
-      address: {
-        city:data.city,
-        country: data.country,
-        state: data.state,
-        zipcode: data.zipcode,
-
-      },
-      phone: data.phone,
-      productIds: cartItems.map(item=>item?._id ),
-      totalPrice: totalPrice,
-
-    };
-    console.log(newOrder)
-  }
+  const [ createOrder, { isLoading, error} ]=useCreateOrderMutation(  )
+  
+ const onSubmit = async (data) => {
+   const newOrder = {
+     name: data.name,
+     email: currentUser?.email,
+     address: {
+       street: data['address.street'],
+       city: data.city,
+       country: data.country,
+       state: data.state,
+       zipcode: data.zipcode,
+     },
+     phone: data.phone,
+     productIds: cartItems.map((item) => item?._id),
+     totalPrice,
+   }
+   try {
+    await createOrder(newOrder).unwrap()
+    alert("Your order placed successful")
+   } catch (error) {
+    console.error("Error place an order  ",error)
+    alert("Failed ot place an order")
+   }
+ }
 
   const [ isChecked, setIsChecked] = useState(false)
 
+  if(isLoading) return <div>Loading...</div>
   return (
     <section>
       <div className="min-h-screen p-6 bg-gray-100 flex items-center justify-center">
@@ -54,7 +63,7 @@ const CheckOutPage = () => {
                 Cash On Delevary
               </h2>
               <p className="text-gray-500 mb-2">Total Price: ${totalPrice}</p>
-              <p className="text-gray-500 mb-6">Items:0</p>
+              <p className="text-gray-500 mb-6">Items:{cartItems.length}</p>
             </div>
 
             <div className="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6">
@@ -75,7 +84,7 @@ const CheckOutPage = () => {
                         type="text"
                         name="name"
                         id="name"
-                        {...register("name", { required: true })}
+                        {...register('name', { required: true })}
                         className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                       />
                     </div>
@@ -98,7 +107,7 @@ const CheckOutPage = () => {
                         type="number"
                         name="phone"
                         id="phone"
-                        {...register("phone", { required: true })}
+                        {...register('phone', { required: true })}
                         className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                         placeholder="+123 456 7890"
                       />
@@ -108,9 +117,9 @@ const CheckOutPage = () => {
                       <label htmlFor="address">Address / Street</label>
                       <input
                         type="text"
-                        name="address"
+                        name="address.street"
                         id="address"
-                        {...register("address", { required: true })}
+                        {...register('address.street', { required: true })}
                         className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                         placeholder=""
                       />
@@ -122,7 +131,7 @@ const CheckOutPage = () => {
                         type="text"
                         name="city"
                         id="city"
-                        {...register("city", { required: true })}
+                        {...register('city', { required: true })}
                         className="h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                         placeholder=""
                       />
@@ -135,7 +144,7 @@ const CheckOutPage = () => {
                           name="country"
                           id="country"
                           placeholder="Country"
-                          {...register("country", { required: true })}
+                          {...register('country', { required: true })}
                           className="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
                         />
                         <button
@@ -181,7 +190,7 @@ const CheckOutPage = () => {
                           name="state"
                           id="state"
                           placeholder="State"
-                          {...register("state", { required: true })}
+                          {...register('state', { required: true })}
                           className="px-4 appearance-none outline-none text-gray-800 w-full bg-transparent"
                         />
                         <button className="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-red-600">
@@ -223,7 +232,7 @@ const CheckOutPage = () => {
                         type="text"
                         name="zipcode"
                         id="zipcode"
-                        {...register("zipcode", { required: true })}
+                        {...register('zipcode', { required: true })}
                         className="transition-all flex items-center h-10 border mt-1 rounded px-4 w-full bg-gray-50"
                         placeholder=""
                       />
@@ -233,18 +242,19 @@ const CheckOutPage = () => {
                       <div className="inline-flex items-center">
                         <input
                           type="checkbox"
-                          name="billing_same"
+                          name="termsAccepted"
                           id="billing_same"
-                          {...register("state", { required: true })}
+                          {...register('termsAccepted', { required: true })}
                           onChange={() => setIsChecked(!isChecked)}
                           className="form-checkbox"
                         />
+
                         <label htmlFor="billing_same" className="ml-2 ">
-                          I am aggree to the{" "}
+                          I am aggree to the{' '}
                           <Link className="underline underline-offset-2 text-blue-600">
                             Terms & Conditions
-                          </Link>{" "}
-                          and{" "}
+                          </Link>{' '}
+                          and{' '}
                           <Link className="underline underline-offset-2 text-blue-600">
                             Shoping Policy.
                           </Link>
@@ -255,8 +265,14 @@ const CheckOutPage = () => {
                     <div className="md:col-span-5 text-right">
                       <div className="inline-flex items-end">
                         <button
-                          disabled={!isChecked}
-                          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                          disabled={
+                            !isChecked || Object.keys(errors).length > 0
+                          }
+                          className={`${
+                            !isChecked || Object.keys(errors).length > 0
+                              ? 'bg-gray-400'
+                              : 'bg-blue-500 hover:bg-blue-700'
+                          } text-white font-bold py-2 px-4 rounded`}
                         >
                           Place an Order
                         </button>
@@ -270,7 +286,7 @@ const CheckOutPage = () => {
         </div>
       </div>
     </section>
-  );
+  )
 };
 
 export default CheckOutPage;

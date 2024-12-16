@@ -14,7 +14,7 @@ import { Pagination } from "swiper/modules";
 
 // import required modules
 import { Navigation } from 'swiper/modules';
-import { useFetchAllBooksQuery } from "../../redux/features/cart/booksApi";
+import { useFetchAllBooksQuery } from "../../redux/features/books/booksApi";
 
 
 const category = [
