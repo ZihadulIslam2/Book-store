@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 import { useCreateOrderMutation } from "../../redux/features/orders/orderApi";
@@ -25,6 +25,7 @@ const totalPrice = parseFloat(
   } = useForm();
 
   const [ createOrder, { isLoading, error} ]=useCreateOrderMutation(  )
+  const navigate = useNavigate()
   
  const onSubmit = async (data) => {
    const newOrder = {
@@ -44,6 +45,7 @@ const totalPrice = parseFloat(
    try {
     await createOrder(newOrder).unwrap()
     alert("Your order placed successful")
+    navigate("/order")
    } catch (error) {
     console.error("Error place an order  ",error)
     alert("Failed ot place an order")
