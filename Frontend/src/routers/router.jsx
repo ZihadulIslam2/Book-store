@@ -9,6 +9,7 @@ import CheckOutPage2 from "../pages/books/CheckOutPage2";
 import SingleBook from "../pages/books/SingleBook";
 import PrivateRoute from "./PrivateRoute";
 import OrderPage from "../pages/books/orderPage";
+import AdminRoutes from "./AdminRoutes";
 
 
 const router = createBrowserRouter([
@@ -60,6 +61,28 @@ const router = createBrowserRouter([
         path: '/book/:id',
         element: <SingleBook />,
       },
+      {
+        path:'/dashboard',
+        element: <AdminRoutes/>,
+        children:[
+          {
+            path:"",
+            element: <div>Dashboard Home</div>
+          },
+          {
+            path:"add-new-book",
+            element: <div>Add new book</div>
+          },
+          {
+            path:"edit-book/:id",
+            element: <div>Edit book</div>
+          },
+          {
+            path:"manage-books",
+            element: <div>Manage books</div>
+          },
+        ]
+      }
     ],
   },
 ])
