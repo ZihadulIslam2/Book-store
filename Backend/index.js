@@ -8,12 +8,27 @@ const port = process.env.port || 5000;
 
 // middleware
 app.use(express.json())
+// app.use(
+//   cors({
+//     origin: ['http://localhost:5173'],
+//     methods: 'GET,POST,PUT,DELETE',
+//     credentials: true,
+//   })
+// )
+
 app.use(
   cors({
-    origin: ["http://localhost:5173"],
-    credentials: true,
+    origin: '*', // Use '*' for testing, not recommended for production
+    methods: 'GET,POST,PUT,DELETE',
   })
-);
+)
+
+
+app.use((req, res, next) => {
+  console.log('CORS middleware triggered for:', req.path)
+  next()
+})
+
 // http://localhost:5174/
 // routes
 const bookRoutes = require ("./src/books/book.route")
