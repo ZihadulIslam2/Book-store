@@ -11,6 +11,7 @@ import PrivateRoute from './PrivateRoute'
 import OrderPage from '../pages/books/orderPage'
 import AdminRoutes from './AdminRoutes'
 import AdminLogin from '../components/AdminLogin'
+import DashboardLayout from './../pages/dashboard/DashboardLayout';
 
 const router = createBrowserRouter([
   {
@@ -67,11 +68,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard',
-        element: <AdminRoutes />, // AdminRoutes guards the dashboard path
+        element: <AdminRoutes></AdminRoutes>, // AdminRoutes guards the dashboard path
         children: [
           {
             path: '', // Default child route for /dashboard
-            element: <div>Dashboard Home</div>, // Content for the dashboard home
+            element: <DashboardLayout />, // Content for the dashboard home
           },
           {
             path: 'add-new-book',

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import axios  from 'axios';
 import getBaseUrl from './../utils/baseUrl';
@@ -69,7 +69,7 @@ const AdminLogin = () => {
               id="username"
               placeholder="User Name "
               {...register('username', { required: true })}
-              className="border rounded px-2 shadow appearance-none w-full py-2 px-3 leading-tight focus:outline-none focus:shadow"
+              className="border rounded  shadow appearance-none w-full py-2 px-3 leading-tight focus:outline-none focus:shadow"
             />
           </div>
 
@@ -86,7 +86,7 @@ const AdminLogin = () => {
               id="password"
               {...register('password', { required: true })}
               placeholder="password"
-              className="border rounded px-2 shadow appearance-none w-full py-2 px-3 leading-tight focus:outline-none focus:shadow"
+              className="border rounded  shadow appearance-none w-full py-2 px-3 leading-tight focus:outline-none focus:shadow"
             />
           </div>
           {message && (
