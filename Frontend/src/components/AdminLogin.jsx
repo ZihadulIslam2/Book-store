@@ -32,6 +32,17 @@ const AdminLogin = () => {
            )
            console.log('Login response:', response.data)
            const auth = response.data
+           if(auth.token) {
+            localStorage.setItem('token', auth.token)
+            setTimeout(()=>{
+              localStorage.removeItem('token')
+              alert("Token has been expired, Please login again.")
+              navigate('/')
+            }, 3600*1000 )
+           }
+
+           alert("Admin login Successful!")
+
            navigate('/dashboard')
          } catch (error) {
            console.error('Error during login:', error)

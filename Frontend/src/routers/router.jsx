@@ -1,17 +1,16 @@
-import { createBrowserRouter } from "react-router-dom";
-import App from "../App";
-import Home from "../pages/home/Home";
-import Login from "../components/Login";
-import Register from "../components/Register";
-import CartPage from '../pages/books/CartPage';
-import CheckOutPage from "../pages/books/CheckOutPage";
-import CheckOutPage2 from "../pages/books/CheckOutPage2";
-import SingleBook from "../pages/books/SingleBook";
-import PrivateRoute from "./PrivateRoute";
-import OrderPage from "../pages/books/orderPage";
-import AdminRoutes from "./AdminRoutes";
-import AdminLogin from "../components/AdminLogin";
-
+import { createBrowserRouter } from 'react-router-dom'
+import App from '../App'
+import Home from '../pages/home/Home'
+import Login from '../components/Login'
+import Register from '../components/Register'
+import CartPage from '../pages/books/CartPage'
+import CheckOutPage from '../pages/books/CheckOutPage'
+import CheckOutPage2 from '../pages/books/CheckOutPage2'
+import SingleBook from '../pages/books/SingleBook'
+import PrivateRoute from './PrivateRoute'
+import OrderPage from '../pages/books/orderPage'
+import AdminRoutes from './AdminRoutes'
+import AdminLogin from '../components/AdminLogin'
 
 const router = createBrowserRouter([
   {
@@ -56,8 +55,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/admin',
-        element: <AdminLogin/>
-
+        element: <AdminLogin />,
       },
       {
         path: '/checkout2',
@@ -69,24 +67,17 @@ const router = createBrowserRouter([
       },
       {
         path: '/dashboard',
-        element: <AdminRoutes />,
+        element: <AdminRoutes />, // AdminRoutes guards the dashboard path
         children: [
           {
-            path: '',
-            element: (
-              <AdminRoutes>
-                <div>Dashboard Home</div>
-              </AdminRoutes>
-            ),
+            path: '', // Default child route for /dashboard
+            element: <div>Dashboard Home</div>, // Content for the dashboard home
           },
           {
             path: 'add-new-book',
-            element: (
-              <AdminRoutes>
-                <div>Add new book</div>
-              </AdminRoutes>
-            ),
+            element: <div>Add new book</div>, // Content for adding a new book
           },
+
           {
             path: 'edit-book/:id',
             element: (
@@ -109,4 +100,4 @@ const router = createBrowserRouter([
   },
 ])
 
-export default router;
+export default router
